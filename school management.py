@@ -1,4 +1,18 @@
 import mysqlCommands as MSC
+import pymysql
+conn = pymysql.connect(
+        host='localhost',
+        user='root', 
+        password = "root"
+        )
+
+MSC.database_checker("school", "Y")
+if MSC.table_checker("school", "class12") == "Unchecked":
+    cur = conn.cursor()
+    cur.execute("use school")
+    cur.execute("create table class12 (registeration_no int auto_increment primary key, first_name varchar(255), last_name varchar(255))")
+else:
+    pass
 
 while True:
     main_screen_options = ["Add New Student", "Show all students", "Cancel Admission"]
